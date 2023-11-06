@@ -1,0 +1,107 @@
+import lib.*
+
+describe "Test Fahrenheit 451"{
+	
+	test "La valoración para la versión ilustrada"{
+		fahrenheit451.cambiarVersion("ilustrada")
+		assert.equals(fahrenheit451.valoracion(), 8000)
+	}
+	
+	test "la valoración para la versión no ilustrada"{
+		assert.equals(fahrenheit451.valoracion(), 3500)
+	}
+	
+	test "el precio para la versión ilustrada"{
+		fahrenheit451.cambiarVersion("ilustrada")
+		assert.equals(fahrenheit451.precio(), 6000)
+	}
+	
+	test "el precio para la versión no ilustrada"{
+		assert.equals(fahrenheit451.precio(), 5000)
+	}
+}
+
+describe "Test Cuidado con el Perro"{
+	test "El precio con un precio base par"{
+		assert.equals(cuidadoConElPerro.precio(), 3400)
+	}
+	test "El precio con un precio base impar"{
+		cuidadoConElPerro.precio(2901)
+		assert.equals(cuidadoConElPerro.precio(), 3501)
+	}
+	test "La valoración con el precio base par"{
+		cuidadoConElPerro.precio(3400)
+		assert.equals(cuidadoConElPerro.valoracion(), 6700)
+	}
+}
+
+describe "Test Patrones de Diseño"{
+	test "El valor imaginario"{
+		assert.equals(patronesDeDisenio.valorImaginario(), 462)
+	}
+	test"La valoración"{
+		assert.equals(patronesDeDisenio.valoracion(), 4924)
+	}
+	test"El precio"{
+		assert.equals(patronesDeDisenio.precio(), 5000)
+	}
+	test"El precio con un like más"{
+		patronesDeDisenio.likes(302)
+		assert.equals(patronesDeDisenio.precio(), 6000)
+	}
+}
+
+describe "Test de Cristina"{
+	test "Cuidado con el Perro"{
+		assert.that(cristina.leGusta(cuidadoConElPerro))
+	}
+	test "Fahrenheit 451"{
+		assert.notThat(cristina.leGusta(fahrenheit451))
+	}
+	test "Fahrenheit 451 ilustrado"{
+		fahrenheit451.cambiarVersion("ilustrada")
+		assert.that(cristina.leGusta(fahrenheit451))
+	}
+}
+
+describe "Test de Roberto"{
+	test "Cuidado con el Perro"{
+		assert.notThat(roberto.leGusta(cuidadoConElPerro))
+	}
+	test "Patrones de Diseño"{
+		assert.that(roberto.leGusta(patronesDeDisenio))
+	}
+}
+
+describe "Test de Patricia"{
+	test "Cuando está de humor y para el libro  Cuidado con el Perro" {
+		assert.that(patricia.leGusta(cuidadoConElPerro))
+	}
+	test "Cuando no está de humor y para el libro  Cuidado con el Perro"{
+		patricia.humor(false)
+		assert.notThat(patricia.leGusta(cuidadoConElPerro))
+	}
+	test "Cuando no está de humor y para el libro Patrones de Diseño"{
+		patricia.humor(false)
+		assert.that(patricia.leGusta(patronesDeDisenio))
+	}
+}
+
+describe "Tests de Libros"{
+	test "promedio de reviews"{
+		var libroPrueba = new Libro(autor = "Pepe", hojas = 100, precio = 350)
+		var review1 = new Review(nota = 10, comentario = "el mejor libro que lei jamás")
+		var review2 = new Review(nota = 5, comentario = "buena lectura de bolsillo")
+		var review3 = new Review(nota = 3, comentario = "no lo volvería a leer ni loco")
+		
+		libroPrueba.agregarReview(review1.nota(), review1.comentario())
+		libroPrueba.agregarReview(review2.nota(), review2.comentario())
+		libroPrueba.agregarReview(review3.nota(), review3.comentario())
+		
+		assert.equals(libroPrueba.puntajePromedio(), 6)
+	}
+}
+
+describe "Tests de Personas"{
+	test ""
+}
